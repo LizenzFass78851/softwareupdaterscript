@@ -17,9 +17,12 @@ SET filename=Firefox Setup %Version%.exe
 REM These values are important for download via proxy and must be set if this is the case
 SET proxy=http://test:test@192.168.10.1:8888
 
+REM set the user agent here if the internet connection refuses to download without a user agent
+SET ua=Chrome/90.0.4430.85
+
 
 :download
-aria2c.exe --all-proxy=%proxy% "%LinkToDownloadServer%/%filename%"
+aria2c.exe --user-agent=%ua% --all-proxy=%proxy% "%LinkToDownloadServer%/%filename%"
 if EXIST "%filename%.aria2" goto :download
 goto :install
 
